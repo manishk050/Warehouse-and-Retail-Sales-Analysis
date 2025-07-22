@@ -50,9 +50,9 @@ The final step was to investigate the cause of the 2018 beer slump. The analysis
 
 ```
 .
-├── 📄 montgomery_county_analysis.ipynb   # Jupyter Notebook with the full Python analysis
-├── 📄 index.html                         # The final single-page application infographic
-└── 📄 README.md                          # You are here!
+├── 📄 warehouse and retail sales data analysis.ipynb   # Jupyter Notebook with the full Python analysis
+├── 📄 index.html                                       # The final single-page application infographic
+└── 📄 README.md                                        # You are here!
 ```
 
 ---
