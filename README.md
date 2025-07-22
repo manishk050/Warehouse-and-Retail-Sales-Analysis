@@ -1,6 +1,5 @@
 # Montgomery County Sales Data Analysis
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge&logo=netlify)](https://your-live-demo-link.netlify.app/) 
 [![Project Status](https://img.shields.io/badge/Status-Completed-blue?style=for-the-badge)]()
 
 This repository contains a complete data analysis project on the Montgomery County, MD "Warehouse and Retail Sales" dataset. The project walks through the entire data analysis workflow, from data cleaning and exploratory data analysis (EDA) in a Jupyter Notebook to the creation of a final, interactive single-page infographic that visualizes the key findings.
