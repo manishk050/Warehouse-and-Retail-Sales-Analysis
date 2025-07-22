@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montgomery County Sales Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F5F1;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+        .kpi-value {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+        .kpi-label {
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+        .highlight-red {
+            color: #DB1F48;
+        }
+        .bg-dark-blue {
+            background-color: #004369;
+        }
+        .text-teal {
+            color: #01949A;
+        }
+        .table-header {
+            background-color: #004369;
+            color: #F8F5F1;
+        }
+        .table-row-alt {
+            background-color: #E5DDC8;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-dark-blue text-white text-center py-12 px-4">
+        <h1 class="text-4xl md:text-5xl font-bold mb-2">Montgomery County's Data Analysis</h1>
+        <p class="text-lg md:text-xl max-w-3xl mx-auto">An interactive analysis of Montgomery County's sales data reveals a story of volatility, dominance, and a critical mystery from 2018.</p>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-4 md:p-8">
+
+        <section id="volatility" class="bg-white rounded-lg shadow-lg p-6 md:p-8 mb-12">
+            <h2 class="text-3xl font-bold mb-2 text-teal">Finding 1: A Volatile Ride</h2>
+            <p class="text-gray-600 mb-6 max-w-4xl">An initial review of total monthly sales reveals a business characterized by high volatility, not smooth seasonality. This suggests revenue is driven by irregular events or inventory cycles. The most significant event is a severe and prolonged sales slump throughout 2018.</p>
+            <div class="chart-container">
+                <canvas id="totalSalesChart"></canvas>
+            </div>
+        </section>
+
+        <section id="dominance" class="bg-white rounded-lg shadow-lg p-6 md:p-8 mb-12">
+            <h2 class="text-3xl font-bold mb-2 text-teal">Finding 2: The Dominance of Beer</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <p class="text-gray-600 mb-4">An analysis of sales by product category shows that revenue is overwhelmingly concentrated in alcoholic beverages. <strong class="highlight-red">Beer</strong> is the single most dominant category, generating more than three times the revenue of the next highest category, Wine.</p>
+                    <div class="bg-dark-blue text-white rounded-lg p-6 text-center">
+                        <div class="kpi-value">3x+</div>
+                        <div class="kpi-label">More Revenue from Beer vs. Wine</div>
+                    </div>
+                </div>
+                <div class="chart-container" style="height: 350px;">
+                    <canvas id="categoryDonutChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="beer-story" class="bg-white rounded-lg shadow-lg p-6 md:p-8 mb-12">
+            <h2 class="text-3xl font-bold mb-2 text-teal">Finding 3: Beer's Performance Dictates Business Health</h2>
+            <p class="text-gray-600 mb-6 max-w-4xl">By plotting the sales of the top three categories over time, it becomes clear that the overall business performance is a direct reflection of beer sales. The volatility, the 2018 slump, and the 2020 peak are all driven almost exclusively by the performance of the beer category.</p>
+            <div class="chart-container">
+                <canvas id="topCategoriesChart"></canvas>
+            </div>
+        </section>
+
+        <section id="mystery" class="bg-white rounded-lg shadow-lg p-6 md:p-8 mb-12">
+            <h2 class="text-3xl font-bold mb-2 text-teal">Finding 4: The 2018 Mystery Uncovered</h2>
+            <p class="text-gray-600 mb-6 max-w-4xl">The 2018 slump was not caused by a single supplier failure. It was a catastrophic, across-the-board sales collapse from every major beer supplier, with an average revenue drop of nearly 80%. This proves the slump was a <strong class="highlight-red">systemic event</strong> affecting the entire beer operation.</p>
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-left text-sm font-light rounded-lg overflow-hidden">
+                    <thead class="font-medium table-header">
+                        <tr>
+                            <th scope="col" class="px-6 py-4">Supplier</th>
+                            <th scope="col" class="px-6 py-4 text-right">2017 Sales</th>
+                            <th scope="col" class="px-6 py-4 text-right">2018 Sales</th>
+                            <th scope="col" class="px-6 py-4 text-right">% Decrease</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-200">
+                            <td class="whitespace-nowrap px-6 py-4 font-medium">CROWN IMPORTS</td>
+                            <td class="whitespace-nowrap px-6 py-4 text-right">$501,610</td>
+                            <td class="whitespace-nowrap px-6 py-4 text-right">$101,611</td>
+                            <td class="whitespace-nowrap px-6 py-4 text-right font-bold highlight-red">~80%</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 table-row-alt">
+                            <td class="whitespace-nowrap px-6 py-4 font-medium">MILLER BREWING COMPANY</td>
+                            <td class="whitespace-nowrap px-6 py-4 text-right">$479,216</td>
+                            <td class="whitespace-nowrap px-6 py-4 text-right">$106,634</td>
+                            <td class="whitespace-nowrap px-6 py-4 text-right font-bold highlight-red">~78%</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="whitespace-nowrap px-6 py-4 font-medium">ANHEUSER BUSCH INC</td>
+                            <td class="whitespace-nowrap px-6 py-4 text-right">$456,780</td>
+                            <td class="whitespace-nowrap px-6 py-4 text-right">$95,939</td>
+                            <td class="whitespace-nowrap px-6 py-4 text-right font-bold highlight-red">~79%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="recommendations" class="py-8">
+            <h2 class="text-3xl font-bold mb-8 text-center text-teal">Strategic Recommendations</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <div class="text-4xl mb-4">🔍</div>
+                    <h3 class="text-xl font-bold mb-2">Investigate the 2018 Failure</h3>
+                    <p class="text-gray-600">Conduct a high-priority internal review to determine the root cause of the 2018 beer sales collapse to prevent its recurrence.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <div class="text-4xl mb-4">🤝</div>
+                    <h3 class="text-xl font-bold mb-2">Diversify Supplier Relationships</h3>
+                    <p class="text-gray-600">While strengthening ties with top partners, actively increase business with second-tier suppliers to mitigate concentration risk.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <div class="text-4xl mb-4">📈</div>
+                    <h3 class="text-xl font-bold mb-2">Develop Stable Categories</h3>
+                    <p class="text-gray-600">Create a long-term strategy to grow the predictable Wine and Liquor categories to diversify revenue and reduce volatility.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center py-6 bg-dark-blue text-white mt-8">
+        <p> Montgomery County's Warehouse and Retail Sales Data Analysis - Manish P Kharatamal</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const energeticPalette = {
+                darkBlue: '#004369',
+                teal: '#01949A',
+                red: '#DB1F48',
+                beige: '#E5DDC8',
+                offWhite: '#F8F5F1'
+            };
+
+            const defaultTooltipCallback = {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                    return label.join(' ');
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            };
+            
+            function formatLabel(str, maxLen = 16) {
+                if (str.length <= maxLen) {
+                    return str;
+                }
+                const words = str.split(' ');
+                let lines = [];
+                let currentLine = '';
+                for (const word of words) {
+                    if ((currentLine + word).length > maxLen) {
+                        lines.push(currentLine.trim());
+                        currentLine = '';
+                    }
+                    currentLine += word + ' ';
+                }
+                lines.push(currentLine.trim());
+                return lines;
+            }
+
+            const totalSalesCtx = document.getElementById('totalSalesChart').getContext('2d');
+            new Chart(totalSalesCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2017-05', '2017-07', '2017-09', '2017-11', '2018-01', '2018-03', '2018-05', '2018-07', '2018-09', '2018-11', '2019-01', '2019-03', '2019-05', '2019-07', '2019-09', '2019-11', '2020-01', '2020-03', '2020-05', '2020-07', '2020-09'],
+                    datasets: [{
+                        label: 'Total Monthly Sales',
+                        data: [475000, 410000, 395000, 438000, 330000, 345000, 348000, 350000, 355000, 357000, 330000, 378000, 478000, 438000, 405000, 438000, 358000, 420000, 470000, 525000, 448000],
+                        borderColor: energeticPalette.darkBlue,
+                        backgroundColor: 'rgba(0, 67, 105, 0.1)',
+                        fill: true,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    ...defaultTooltipCallback,
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + (value / 1000) + 'K';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const categoryDonutCtx = document.getElementById('categoryDonutChart').getContext('2d');
+            new Chart(categoryDonutCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['BEER', 'WINE', 'LIQUOR', 'Other'],
+                    datasets: [{
+                        label: 'Sales by Category',
+                        data: [6800000, 2000000, 1200000, 500000],
+                        backgroundColor: [
+                            energeticPalette.darkBlue,
+                            energeticPalette.teal,
+                            '#5E8B7E',
+                            energeticPalette.beige
+                        ],
+                        borderColor: energeticPalette.offWhite,
+                        borderWidth: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        ...defaultTooltipCallback.plugins
+                    }
+                }
+            });
+
+            const topCategoriesCtx = document.getElementById('topCategoriesChart').getContext('2d');
+            new Chart(topCategoriesCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2017-05', '2018-01', '2018-09', '2019-01', '2019-09', '2020-01', '2020-09'],
+                    datasets: [{
+                        label: 'BEER',
+                        data: [355000, 225000, 245000, 220000, 290000, 250000, 370000],
+                        borderColor: energeticPalette.darkBlue,
+                        tension: 0.1
+                    }, {
+                        label: 'LIQUOR',
+                        data: [38000, 50000, 35000, 35000, 42000, 32000, 35000],
+                        borderColor: energeticPalette.red,
+                        tension: 0.1
+                    }, {
+                        label: 'WINE',
+                        data: [80000, 72000, 75000, 75000, 88000, 75000, 78000],
+                        borderColor: energeticPalette.teal,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    ...defaultTooltipCallback,
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + (value / 1000) + 'K';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
