@@ -50,10 +50,6 @@ The final step was to investigate the cause of the 2018 beer slump. The analysis
 
 ```
 .
-├── 📁 data/
-│   └── Warehouse_and_Retail_Sales.csv   # The raw dataset
-├── 📁 images/
-│   └── (Screenshots of charts for README)
 ├── 📄 montgomery_county_analysis.ipynb   # Jupyter Notebook with the full Python analysis
 ├── 📄 index.html                         # The final single-page application infographic
 └── 📄 README.md                          # You are here!
